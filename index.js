@@ -5,37 +5,37 @@ const cors = require('cors');
 require('dotenv').config()
 
 app.use(cors({
-  origin: '*'
+    origin: '*'
 }))
 
 
 
 app.get(':endpoint([\\/\\w\\.-]*)', function(req, res) {
 
-  let endpoint = process.env.API_BASE_URL + req.params.endpoint;
+    let endpoint = process.env.API_BASE_URL + req.params.endpoint;
 
-  let params = {};
+    let params = {};
 
-  if(!!process.env.APP_ID_PARAM_NAME && !!process.env.APP_ID) {
-    params[process.env.APP_ID_PARAM_NAME] = process.env.APP_ID
-  }
+    if(!!process.env.APP_ID_PARAM_NAME && !!process.env.APP_ID) {
+        params[process.env.APP_ID_PARAM_NAME] = process.env.APP_ID
+    }
 
-  for(const [filed, value] of Object.entries(req.query)) {
-    params[field] = value
-  }
+    for(const [field, value] of Object.entries(req.query)) {
+        params[field] = value
+    }
 
-  axios
-    .get(endpoint, {
-      params: params
-    }).then(response => {
-      res.json(response.data);
-    })
-    .catch(error => {
-      res.json(error)
-    })
+    axios
+        .get(endpoint, {
+            params: params
+        }).then(response => {
+            res.json(response.data)
+        })
+        .catch(error => {
+            res.json(error)
+        })
 })
 
 //PORT
-const port = process.env.PORT || 4000;
-app.listen(port, () => {console.log(`OpenWeatherMap API listening ${port}...`)});
+const port = process.env.PORT || 4000
+app.listen(port, () => {console.log(`OpenWeatherMap API listening ${port}...`)})
 
