@@ -16,9 +16,9 @@ app.get(':endpoint([\\/\\w\\.-]*)', function(req, res) {
 
     let params = {};
 
-    if(!!process.env.APP_ID_PARAM_NAME && !!process.env.APP_ID) {
-        params[process.env.APP_ID_PARAM_NAME] = process.env.APP_ID
-    }
+    // if(!!process.env.APP_ID_PARAM_NAME && !!process.env.APP_ID) {
+    //     params[process.env.APP_ID_PARAM_NAME] = process.env.APP_ID
+    // }
 
     for(const [field, value] of Object.entries(req.query)) {
         params[field] = value
